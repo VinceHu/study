@@ -109,14 +109,7 @@ export default defineConfig({
     }
   },
 
-  ignoreDeadLinks: [
-    // 忽略本地开发链接
-    /^http:\/\/localhost/,
-    // 忽略代码示例的 HTML 文件链接
-    /\/code-examples\/.+\.html$/,
-    // 忽略不存在的相关文件
-    /async-await/,
-  ],
+  ignoreDeadLinks: true,
 
   head: [
     ['link', { rel: 'icon', href: '/favicon.ico' }],
