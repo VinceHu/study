@@ -1,6 +1,7 @@
 import { defineConfig } from 'vitepress'
 
 export default defineConfig({
+  base: '/study/',
   title: "前端面试指导",
   description: "系统化的前端面试题整理和学习平台",
   
