@@ -144,9 +144,9 @@ npm run docs:preview
 ## 📊 项目统计
 
 ### 内容统计
-- 📝 题目总数：13题
+- 📝 题目总数：15题
 - 🎨 CSS题目：5题
-- ⚡ JavaScript题目：6题
+- ⚡ JavaScript题目：8题
 - 💚 Vue题目：2题
 - 💻 代码示例：4个
 

@@ -16,6 +16,7 @@
 ## JavaScript
 
 ### 数组操作
+- [数组的常见方法](../questions/javascript/array-methods.md) - 基础 ⭐⭐⭐⭐⭐
 - [数组去重](../questions/javascript/array-dedup.md) - 基础 ⭐⭐⭐⭐⭐
 - [对象数组去重](../questions/javascript/object-array-dedup.md) - 中级 ⭐⭐⭐⭐
 
@@ -23,6 +24,7 @@
 - [Promise详解](../questions/javascript/promise.md) - 中级 ⭐⭐⭐⭐⭐
 - [事件循环](../questions/javascript/event-loop.md) - 中级 ⭐⭐⭐⭐⭐
 - [闭包](../questions/javascript/closure.md) - 中级 ⭐⭐⭐⭐⭐
+- [为什么需要闭包](../questions/javascript/why-closure.md) - 中级 ⭐⭐⭐⭐⭐
 
 ### 基础语法
 - [var/let/const区别](../questions/javascript/var-let-const.md) - 基础 ⭐⭐⭐⭐⭐
@@ -41,6 +43,7 @@
 ### 基础题目
 - [CSS盒模型](../questions/css/box-model.md)
 - [Position定位](../questions/css/position.md)
+- [数组的常见方法](../questions/javascript/array-methods.md)
 - [数组去重](../questions/javascript/array-dedup.md)
 - [var/let/const区别](../questions/javascript/var-let-const.md)
 - [var作用域](../questions/javascript/var-scope.md)
@@ -53,6 +56,7 @@
 - [Promise详解](../questions/javascript/promise.md)
 - [事件循环](../questions/javascript/event-loop.md)
 - [闭包](../questions/javascript/closure.md)
+- [为什么需要闭包](../questions/javascript/why-closure.md)
 
 ### 高级题目
 - [绝对定位vs Transform](../questions/performance/transform-vs-position.md)
@@ -75,7 +79,8 @@ Position定位 → 水平垂直居中
 var作用域 → var/let/const区别
          → 闭包
 
-闭包 → 数组去重
+闭包 → 为什么需要闭包
+    → 数组去重
     → 对象数组去重
 
 事件循环 → nextTick原理
@@ -101,8 +106,9 @@ var作用域 → var/let/const区别
 2. 水平垂直居中
 3. var作用域
 4. 闭包
-5. 对象数组去重
-6. 事件循环
+5. 为什么需要闭包
+6. 对象数组去重
+7. 事件循环
 
 ### 高级路径（1-2周）
 1. 绝对定位vs Transform
@@ -115,11 +121,13 @@ var作用域 → var/let/const区别
 ### 必考题（⭐⭐⭐⭐⭐）
 - CSS盒模型
 - 水平垂直居中
+- 数组的常见方法
 - 数组去重
 - var/let/const区别
 - Promise详解
 - 事件循环
 - 闭包
+- 为什么需要闭包
 - nextTick原理
 
 ### 常考题（⭐⭐⭐⭐）
@@ -147,8 +155,10 @@ var作用域 → var/let/const区别
 - var作用域
 - var/let/const区别
 - 闭包
+- 为什么需要闭包
 
 ### 数组相关
+- 数组的常见方法
 - 数组去重
 - 对象数组去重
 
