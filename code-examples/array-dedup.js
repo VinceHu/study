@@ -149,11 +149,11 @@ function uniqueByObjectImproved(arr) {
 function uniqueByIncludes(arr) {
   const result = [];
   
-  arr.forEach(item => {
+  for (const item of arr) {
     if (!result.includes(item)) {
       result.push(item);
     }
-  });
+  }
   
   return result;
 }
@@ -167,15 +167,24 @@ function uniqueByIncludes(arr) {
 // ============================================
 
 function uniqueBy(arr, key) {
-  const map = new Map();
-  return arr.filter(item => {
+  const seen = new Set();
+  const result = [];
+  
+  for (const item of arr) {
     const k = item[key];
-    if (map.has(k)) {
-      return false;
+    if (!seen.has(k)) {
+      seen.add(k);
+      result.push(item);
     }
-    map.set(k, true);
-    return true;
-  });
+  }
+  
+  return result;
+}
+
+// 简洁版（牺牲一点性能换取代码简洁）
+function uniqueBySimple(arr, key) {
+  const seen = new Set();
+  return arr.filter(item => !seen.has(item[key]) && seen.add(item[key]));
 }
 
 // ============================================
