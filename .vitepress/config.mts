@@ -1,7 +1,7 @@
 import { defineConfig } from 'vitepress'
 
 export default defineConfig({
-  base: '/study/',
+  base: '/StudyClue/',
   title: "StudyClue",
   description: "Your systematic guide to frontend interview preparation",
   
@@ -181,7 +181,7 @@ export default defineConfig({
     },
 
     socialLinks: [
-      { icon: 'github', link: 'https://github.com/VinceHu/study' }
+      { icon: 'github', link: 'https://github.com/VinceHu/StudyClue' }
     ],
 
     footer: {
@@ -223,9 +223,9 @@ export default defineConfig({
   ignoreDeadLinks: true,
 
   head: [
-    ['link', { rel: 'icon', type: 'image/svg+xml', href: '/study/favicon.svg' }],
-    ['link', { rel: 'alternate icon', type: 'image/x-icon', href: '/study/favicon.ico' }],
-    ['link', { rel: 'apple-touch-icon', href: '/study/logo.svg' }],
+    ['link', { rel: 'icon', type: 'image/svg+xml', href: '/StudyClue/favicon.svg' }],
+    ['link', { rel: 'alternate icon', type: 'image/x-icon', href: '/StudyClue/favicon.ico' }],
+    ['link', { rel: 'apple-touch-icon', href: '/StudyClue/logo.svg' }],
     ['meta', { name: 'theme-color', content: '#42b883' }],
     ['meta', { name: 'keywords', content: '前端面试,面试题,CSS,JavaScript,Vue,浏览器,网络,性能优化,面试指导' }],
     ['meta', { name: 'description', content: 'StudyClue - 系统化的前端面试题学习平台，包含标准答案、深度理解、面试技巧' }],
