@@ -1,0 +1,152 @@
+/* 自定义样式 */
+
+/* 优化表格样式 */
+.vp-doc table {
+  display: table;
+  width: 100%;
+  border-collapse: collapse;
+  margin: 20px 0;
+}
+
+.vp-doc th {
+  background-color: var(--vp-c-bg-soft);
+  font-weight: 600;
+}
+
+.vp-doc th,
+.vp-doc td {
+  border: 1px solid var(--vp-c-divider);
+  padding: 12px 16px;
+}
+
+/* 优化代码块 */
+.vp-doc div[class*='language-'] {
+  margin: 20px 0;
+  border-radius: 8px;
+}
+
+/* 优化标题样式 */
+.vp-doc h2 {
+  margin-top: 48px;
+  border-top: 1px solid var(--vp-c-divider);
+  padding-top: 24px;
+}
+
+.vp-doc h3 {
+  margin-top: 32px;
+}
+
+/* emoji 标题样式 */
+.vp-doc h2:has(+ *) {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+/* 优化列表样式 */
+.vp-doc ul,
+.vp-doc ol {
+  padding-left: 1.5em;
+}
+
+.vp-doc li {
+  margin: 4px 0;
+}
+
+/* 优化引用块 */
+.vp-doc blockquote {
+  border-left: 4px solid var(--vp-c-brand-1);
+  padding-left: 16px;
+  margin: 20px 0;
+  color: var(--vp-c-text-2);
+}
+
+/* 优化链接样式 */
+.vp-doc a {
+  font-weight: 500;
+  transition: color 0.2s;
+}
+
+.vp-doc a:hover {
+  color: var(--vp-c-brand-2);
+}
+
+/* 标签样式 */
+.vp-doc code {
+  background-color: var(--vp-c-bg-soft);
+  padding: 3px 6px;
+  border-radius: 4px;
+  font-size: 0.9em;
+}
+
+/* 优化首页卡片 */
+.VPFeature {
+  transition: all 0.3s;
+}
+
+.VPFeature:hover {
+  transform: translateY(-4px);
+  box-shadow: 0 8px 16px rgba(0, 0, 0, 0.1);
+}
+
+/* 自定义容器样式 */
+.custom-block {
+  margin: 20px 0;
+  padding: 16px;
+  border-radius: 8px;
+}
+
+.custom-block.tip {
+  background-color: var(--vp-custom-block-tip-bg);
+  border-left: 4px solid var(--vp-c-brand-1);
+}
+
+.custom-block.warning {
+  background-color: var(--vp-custom-block-warning-bg);
+  border-left: 4px solid var(--vp-c-warning-1);
+}
+
+.custom-block.danger {
+  background-color: var(--vp-custom-block-danger-bg);
+  border-left: 4px solid var(--vp-c-danger-1);
+}
+
+/* 响应式优化 */
+@media (max-width: 768px) {
+  .vp-doc table {
+    font-size: 14px;
+  }
+  
+  .vp-doc th,
+  .vp-doc td {
+    padding: 8px 12px;
+  }
+}
+
+/* 打印样式优化 */
+@media print {
+  .VPNav,
+  .VPSidebar,
+  .VPDocFooter {
+    display: none;
+  }
+  
+  .vp-doc {
+    max-width: 100%;
+  }
+}
+
+/* ========== 题目样式 ========== */
+/* 题目内容（题目标题后的第一个段落）*/
+.vp-doc h1#题目 + p {
+  font-size: 1.25em;
+  font-weight: 600;
+  line-height: 1.8;
+  color: #35495e;
+  margin: 1.5rem 0 2rem 0;
+}
+
+/* 深色模式 */
+.dark .vp-doc h1#题目 + p {
+  color: #42b883;
+}

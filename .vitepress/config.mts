@@ -30,6 +30,7 @@ export default defineConfig({
       { text: 'Vue', link: '/questions/vue/vue2-vs-vue3' },
       { text: 'Network', link: '/questions/browser/url-to-page' },
       { text: 'Performance', link: '/questions/performance/cache-strategy' },
+      { text: '项目实战', link: '/projects/' },
       { text: 'Knowledge Map', link: '/knowledge-map/' }
     ],
 
@@ -184,6 +185,21 @@ export default defineConfig({
           items: [
             { text: '强缓存和协商缓存', link: '/questions/performance/cache-strategy' },
             { text: '绝对定位vs Transform', link: '/questions/performance/transform-vs-position' }
+          ]
+        }
+      ],
+      
+      '/projects/': [
+        {
+          text: '项目实战',
+          items: [
+            { text: '栏目介绍', link: '/projects/' }
+          ]
+        },
+        {
+          text: '性能优化类',
+          items: [
+            { text: '企业级大文件上传', link: '/projects/performance/large-file-upload' }
           ]
         }
       ]

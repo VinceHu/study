@@ -496,6 +496,551 @@ deepClone(obj).then(cloned => {
 });
 ```
 
+## 🏢 企业级应用场景
+
+### 为什么要使用深拷贝？
+
+在企业级项目中，深拷贝主要用于以下场景：
+
+#### 1. 状态管理（不可变数据）
+
+```javascript
+// Redux/Vuex 中的状态更新
+const state = {
+  user: {
+    name: 'Alice',
+    profile: {
+      age: 25,
+      city: 'Beijing'
+    }
+  }
+};
+
+// ❌ 错误：直接修改（违反不可变原则）
+function updateUser(state, newAge) {
+  state.user.profile.age = newAge;  // 直接修改原对象
+  return state;
+}
+
+// ✅ 正确：深拷贝后修改
+function updateUser(state, newAge) {
+  const newState = deepClone(state);
+  newState.user.profile.age = newAge;
+  return newState;
+}
+```
+
+**为什么需要不可变数据？**
+- 便于追踪状态变化（时间旅行调试）
+- 优化性能（浅比较即可判断是否更新）
+- 避免副作用（纯函数）
+
+#### 2. 表单数据备份与重置
+
+```javascript
+// 表单编辑场景
+class FormManager {
+  constructor(initialData) {
+    this.originalData = deepClone(initialData);  // 备份原始数据
+    this.currentData = deepClone(initialData);   // 当前编辑数据
+  }
+  
+  // 修改数据
+  updateField(field, value) {
+    this.currentData[field] = value;
+  }
+  
+  // 重置表单
+  reset() {
+    this.currentData = deepClone(this.originalData);
+  }
+  
+  // 检查是否有修改
+  isDirty() {
+    return JSON.stringify(this.currentData) !== JSON.stringify(this.originalData);
+  }
+}
+
+// 使用
+const form = new FormManager({
+  name: 'Alice',
+  email: 'alice@example.com',
+  settings: {
+    notifications: true,
+    theme: 'dark'
+  }
+});
+
+form.updateField('name', 'Bob');
+console.log(form.isDirty());  // true
+
+form.reset();  // 恢复到原始数据
+console.log(form.currentData.name);  // 'Alice'
+```
+
+#### 3. API 请求数据隔离
+
+```javascript
+// 防止修改缓存数据
+class ApiCache {
+  constructor() {
+    this.cache = new Map();
+  }
+  
+  set(key, data) {
+    // 存储时深拷贝
+    this.cache.set(key, deepClone(data));
+  }
+  
+  get(key) {
+    const data = this.cache.get(key);
+    // 返回时深拷贝，防止外部修改缓存
+    return data ? deepClone(data) : null;
+  }
+}
+
+// 使用
+const cache = new ApiCache();
+
+const userData = { name: 'Alice', age: 25 };
+cache.set('user:1', userData);
+
+// 获取数据
+const user = cache.get('user:1');
+user.age = 30;  // 修改不会影响缓存
+
+console.log(cache.get('user:1').age);  // 25 ✅ 缓存未被污染
+```
+
+#### 4. 配置对象的安全传递
+
+```javascript
+// 插件系统中的配置隔离
+class Plugin {
+  constructor(options) {
+    // 深拷贝配置，防止外部修改
+    this.options = deepClone(options);
+    
+    // 合并默认配置
+    this.options = {
+      ...this.defaultOptions,
+      ...this.options
+    };
+  }
+  
+  get defaultOptions() {
+    return {
+      enabled: true,
+      timeout: 5000,
+      retry: 3
+    };
+  }
+}
+
+// 使用
+const config = {
+  timeout: 3000,
+  headers: {
+    'Content-Type': 'application/json'
+  }
+};
+
+const plugin = new Plugin(config);
+
+// 外部修改不影响插件
+config.timeout = 10000;
+console.log(plugin.options.timeout);  // 3000 ✅
+```
+
+#### 5. 撤销/重做功能
+
+```javascript
+// 编辑器的历史记录
+class HistoryManager {
+  constructor(initialState) {
+    this.history = [deepClone(initialState)];
+    this.currentIndex = 0;
+  }
+  
+  // 保存新状态
+  push(state) {
+    // 删除当前位置之后的历史
+    this.history = this.history.slice(0, this.currentIndex + 1);
+    
+    // 添加新状态
+    this.history.push(deepClone(state));
+    this.currentIndex++;
+  }
+  
+  // 撤销
+  undo() {
+    if (this.currentIndex > 0) {
+      this.currentIndex--;
+      return deepClone(this.history[this.currentIndex]);
+    }
+    return null;
+  }
+  
+  // 重做
+  redo() {
+    if (this.currentIndex < this.history.length - 1) {
+      this.currentIndex++;
+      return deepClone(this.history[this.currentIndex]);
+    }
+    return null;
+  }
+}
+
+// 使用
+const editor = new HistoryManager({ content: '' });
+
+editor.push({ content: 'Hello' });
+editor.push({ content: 'Hello World' });
+
+const prevState = editor.undo();
+console.log(prevState.content);  // 'Hello'
+```
+
+### 什么时候使用深拷贝？
+
+#### ✅ 应该使用深拷贝的场景
+
+1. **需要保持数据不可变性**
+   - Redux/Vuex 状态更新
+   - React 的 setState
+   - 函数式编程
+
+2. **需要备份原始数据**
+   - 表单编辑前备份
+   - 撤销/重做功能
+   - 数据对比
+
+3. **需要隔离数据**
+   - API 缓存
+   - 配置对象传递
+   - 多实例数据隔离
+
+4. **需要避免副作用**
+   - 纯函数实现
+   - 工具函数
+   - 第三方库集成
+
+#### ❌ 不应该使用深拷贝的场景
+
+1. **性能敏感的场景**
+   ```javascript
+   // ❌ 在循环中深拷贝大对象
+   for (let i = 0; i < 10000; i++) {
+     const cloned = deepClone(largeObject);  // 性能问题
+   }
+   
+   // ✅ 使用浅拷贝或引用
+   for (let i = 0; i < 10000; i++) {
+     const ref = largeObject;  // 直接引用
+   }
+   ```
+
+2. **数据量很大的场景**
+   ```javascript
+   // ❌ 克隆大型数据集
+   const bigData = Array(1000000).fill({ id: 1, data: {...} });
+   const cloned = deepClone(bigData);  // 内存和性能问题
+   
+   // ✅ 使用分页或虚拟滚动
+   const page = bigData.slice(0, 100);
+   ```
+
+3. **只需要浅拷贝的场景**
+   ```javascript
+   // ❌ 过度使用深拷贝
+   const obj = { a: 1, b: 2 };
+   const cloned = deepClone(obj);  // 没必要
+   
+   // ✅ 浅拷贝即可
+   const cloned = { ...obj };
+   ```
+
+4. **包含不可克隆对象的场景**
+   ```javascript
+   // ❌ 克隆包含 DOM 节点的对象
+   const obj = {
+     element: document.getElementById('app'),
+     data: { ... }
+   };
+   const cloned = deepClone(obj);  // DOM 节点无法克隆
+   
+   // ✅ 只克隆数据部分
+   const cloned = { data: deepClone(obj.data) };
+   ```
+
+### Options 安全相关
+
+在企业级项目中，配置对象（options）的安全性非常重要：
+
+#### 1. 防止配置污染
+
+```javascript
+// ❌ 不安全：直接使用外部配置
+class HttpClient {
+  constructor(options) {
+    this.options = options;  // 危险！外部可以修改
+  }
+  
+  request(url) {
+    // 使用配置
+    return fetch(url, this.options);
+  }
+}
+
+const options = { timeout: 5000 };
+const client = new HttpClient(options);
+
+// 外部恶意修改
+options.timeout = 0;  // 破坏了客户端配置
+options.headers = { 'X-Evil': 'hack' };  // 注入恶意头部
+
+// ✅ 安全：深拷贝配置
+class HttpClient {
+  constructor(options) {
+    this.options = deepClone(options);  // 隔离外部修改
+    Object.freeze(this.options);  // 冻结配置
+  }
+}
+```
+
+#### 2. 配置合并安全
+
+```javascript
+// ❌ 不安全：浅合并导致原型污染
+function mergeOptions(defaults, options) {
+  return { ...defaults, ...options };  // 浅合并
+}
+
+const defaults = {
+  timeout: 5000,
+  headers: {
+    'Content-Type': 'application/json'
+  }
+};
+
+const userOptions = {
+  headers: {
+    'Authorization': 'Bearer token'
+  }
+};
+
+const merged = mergeOptions(defaults, userOptions);
+console.log(merged.headers);
+// { 'Authorization': 'Bearer token' }
+// ❌ 'Content-Type' 丢失了！
+
+// ✅ 安全：深度合并
+function deepMerge(target, source) {
+  const result = deepClone(target);
+  
+  for (let key in source) {
+    if (source.hasOwnProperty(key)) {
+      if (typeof source[key] === 'object' && source[key] !== null) {
+        result[key] = deepMerge(result[key] || {}, source[key]);
+      } else {
+        result[key] = source[key];
+      }
+    }
+  }
+  
+  return result;
+}
+
+const merged = deepMerge(defaults, userOptions);
+console.log(merged.headers);
+// {
+//   'Content-Type': 'application/json',
+//   'Authorization': 'Bearer token'
+// }
+// ✅ 两个配置都保留了
+```
+
+#### 3. 防止原型污染攻击
+
+```javascript
+// 原型污染攻击示例
+const maliciousPayload = JSON.parse('{"__proto__":{"isAdmin":true}}');
+
+// ❌ 不安全：直接合并
+function unsafeMerge(target, source) {
+  for (let key in source) {
+    if (typeof source[key] === 'object') {
+      target[key] = unsafeMerge(target[key] || {}, source[key]);
+    } else {
+      target[key] = source[key];
+    }
+  }
+  return target;
+}
+
+const config = {};
+unsafeMerge(config, maliciousPayload);
+
+const user = {};
+console.log(user.isAdmin);  // true ❌ 原型被污染！
+
+// ✅ 安全：过滤危险键
+function safeMerge(target, source) {
+  const dangerousKeys = ['__proto__', 'constructor', 'prototype'];
+  
+  for (let key in source) {
+    // 跳过危险键
+    if (dangerousKeys.includes(key)) continue;
+    
+    // 只处理自有属性
+    if (!source.hasOwnProperty(key)) continue;
+    
+    if (typeof source[key] === 'object' && source[key] !== null) {
+      target[key] = safeMerge(target[key] || {}, source[key]);
+    } else {
+      target[key] = source[key];
+    }
+  }
+  
+  return target;
+}
+```
+
+#### 4. 配置验证
+
+```javascript
+// 配置验证和清理
+class SecureConfig {
+  constructor(options) {
+    // 1. 深拷贝隔离
+    const cloned = deepClone(options);
+    
+    // 2. 验证配置
+    this.options = this.validate(cloned);
+    
+    // 3. 冻结配置
+    Object.freeze(this.options);
+  }
+  
+  validate(options) {
+    const validated = {};
+    
+    // 白名单验证
+    const allowedKeys = ['timeout', 'retry', 'headers'];
+    
+    for (let key of allowedKeys) {
+      if (key in options) {
+        // 类型验证
+        if (key === 'timeout' && typeof options[key] === 'number') {
+          validated[key] = Math.max(0, Math.min(options[key], 30000));
+        } else if (key === 'retry' && typeof options[key] === 'number') {
+          validated[key] = Math.max(0, Math.min(options[key], 5));
+        } else if (key === 'headers' && typeof options[key] === 'object') {
+          validated[key] = this.sanitizeHeaders(options[key]);
+        }
+      }
+    }
+    
+    return validated;
+  }
+  
+  sanitizeHeaders(headers) {
+    const sanitized = {};
+    const allowedHeaders = ['Content-Type', 'Authorization', 'Accept'];
+    
+    for (let key of allowedHeaders) {
+      if (key in headers && typeof headers[key] === 'string') {
+        sanitized[key] = headers[key];
+      }
+    }
+    
+    return sanitized;
+  }
+}
+
+// 使用
+const config = new SecureConfig({
+  timeout: 5000,
+  retry: 3,
+  headers: {
+    'Content-Type': 'application/json',
+    'X-Evil': 'hack'  // 会被过滤
+  },
+  __proto__: { isAdmin: true }  // 会被过滤
+});
+
+console.log(config.options);
+// {
+//   timeout: 5000,
+//   retry: 3,
+//   headers: { 'Content-Type': 'application/json' }
+// }
+```
+
+#### 5. 最佳实践总结
+
+```javascript
+// 企业级配置管理最佳实践
+class ConfigManager {
+  constructor(options = {}) {
+    // 1. 深拷贝用户配置
+    const userConfig = deepClone(options);
+    
+    // 2. 深度合并默认配置
+    this.config = this.deepMerge(this.getDefaults(), userConfig);
+    
+    // 3. 验证和清理
+    this.config = this.validate(this.config);
+    
+    // 4. 冻结配置（防止运行时修改）
+    Object.freeze(this.config);
+  }
+  
+  getDefaults() {
+    return {
+      timeout: 5000,
+      retry: 3,
+      headers: {
+        'Content-Type': 'application/json'
+      }
+    };
+  }
+  
+  deepMerge(target, source) {
+    const result = deepClone(target);
+    const dangerousKeys = ['__proto__', 'constructor', 'prototype'];
+    
+    for (let key in source) {
+      if (dangerousKeys.includes(key)) continue;
+      if (!source.hasOwnProperty(key)) continue;
+      
+      if (this.isPlainObject(source[key])) {
+        result[key] = this.deepMerge(result[key] || {}, source[key]);
+      } else {
+        result[key] = source[key];
+      }
+    }
+    
+    return result;
+  }
+  
+  isPlainObject(obj) {
+    return Object.prototype.toString.call(obj) === '[object Object]';
+  }
+  
+  validate(config) {
+    // 实现验证逻辑
+    return config;
+  }
+  
+  // 提供安全的配置访问
+  get(key) {
+    // 返回深拷贝，防止外部修改
+    return deepClone(this.config[key]);
+  }
+}
+```
+
 ## 💡 面试回答技巧
 
 ### 推荐回答顺序

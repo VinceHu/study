@@ -56,9 +56,31 @@
   --app-nav-border: var(--vp-c-divider-light);
 }
 
-/* 深色模式（如果需要） */
+/* 深色模式 */
 .dark {
-  /* 保持浅色主题，与 logo 风格一致 */
-  --vp-c-bg: #ffffff;
-  --vp-c-bg-soft: #f6f6f7;
+  /* 深色模式下的颜色调整 */
+  --vp-c-text-1: #e5e7eb;
+  --vp-c-text-2: #9ca3af;
+  --vp-c-text-3: #6b7280;
+  
+  --vp-c-bg: #1a1a1a;
+  --vp-c-bg-soft: #242424;
+  --vp-c-bg-mute: #2c2c2c;
+  
+  --vp-c-divider: #3c3c3c;
+  --vp-c-divider-light: #363636;
+  
+  --vp-c-border: #3c3c3c;
+  
+  /* 深色模式下的应用颜色 */
+  --app-hero-name-color: var(--logo-primary);
+  --app-hero-text-color: #e5e7eb;
+  --app-hero-tagline-color: #9ca3af;
+  
+  --app-feature-border: #3c3c3c;
+  --app-feature-border-hover: var(--logo-primary);
+  --app-feature-shadow-hover: rgba(66, 184, 131, 0.2);
+  
+  --app-nav-bg: #1a1a1a;
+  --app-nav-border: #3c3c3c;
 }
