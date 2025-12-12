@@ -110,7 +110,8 @@ export default defineConfig({
           text: '指令与渲染',
           items: [
             { text: 'v-if 和 v-show 的区别', link: '/questions/vue/v-if-vs-v-show' },
-            { text: 'Vue 的 diff 算法', link: '/questions/vue/diff-algorithm' }
+            { text: 'Vue 的 diff 算法', link: '/questions/vue/diff-algorithm' },
+            { text: 'Vue2 vs Vue3 diff算法对比', link: '/questions/vue/vue-diff-algorithm' }
           ]
         },
         {
