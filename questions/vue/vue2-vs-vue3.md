@@ -506,6 +506,26 @@ const renderer = createRenderer({
 
 ## 💡 面试回答技巧
 
+### 🎯 一句话回答（快速版）
+
+> Vue 3 相比 Vue 2 主要有三大改进：响应式从 Object.defineProperty 改为 Proxy，新增 Composition API 让逻辑复用更方便，以及大量性能优化让渲染更快。
+
+### 📣 口语化回答（推荐）
+
+面试时可以这样回答：
+
+> "Vue 2 和 Vue 3 的区别我从几个方面来说。
+>
+> 首先是**响应式原理**，Vue 2 用的是 `Object.defineProperty`，Vue 3 改成了 `Proxy`。Proxy 的好处是可以监听到新增属性、删除属性、数组索引变化这些 Vue 2 监听不到的操作，而且是懒代理，性能更好。
+>
+> 第二是 **API 风格**，Vue 2 主要是 Options API，就是 data、methods、computed 这种写法。Vue 3 引入了 Composition API，用 setup 函数把相关的逻辑放在一起，代码组织更灵活，逻辑复用也更方便，不用再写 mixin 了。
+>
+> 第三是**性能优化**，Vue 3 做了很多编译优化，比如静态提升、事件缓存、PatchFlag 标记等。官方数据是初始渲染快 55%，更新快 133%，内存占用减少 54%。
+>
+> 另外 Vue 3 还有一些新特性，比如 Fragment 支持多根节点、Teleport 传送门、Suspense 异步组件，还有更好的 TypeScript 支持，因为 Vue 3 本身就是用 TypeScript 重写的。
+>
+> 不过 Vue 3 也保留了对 Options API 的支持，所以 Vue 2 的项目可以渐进式迁移。"
+
 ### 推荐回答顺序
 
 1. **先说响应式原理**：

@@ -150,3 +150,38 @@
 .dark .vp-doc h1#题目 + p {
   color: #42b883;
 }
+
+/* ========== 面试速答样式 ========== */
+/* 使用 VitePress 自定义容器样式 */
+.vp-doc .custom-block.tip {
+  border-color: var(--vp-c-brand-1);
+  background-color: var(--vp-c-brand-soft);
+}
+
+.vp-doc .custom-block.tip .custom-block-title {
+  color: var(--vp-c-brand-1);
+  font-weight: 600;
+}
+
+/* 面试速答特殊样式 */
+.vp-doc h2:has(+ .custom-block.tip) {
+  color: var(--vp-c-brand-1);
+  border-top: none;
+  padding-top: 0;
+  margin-top: 32px;
+}
+
+/* 面试速答内容 */
+.vp-doc .custom-block.tip p {
+  line-height: 1.8;
+  font-size: 0.95em;
+  margin: 0.8em 0;
+}
+
+.vp-doc .custom-block.tip p:first-of-type {
+  margin-top: 0;
+}
+
+.vp-doc .custom-block.tip p:last-of-type {
+  margin-bottom: 0;
+}

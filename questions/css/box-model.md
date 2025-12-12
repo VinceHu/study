@@ -119,6 +119,26 @@ html {
 
 ## 💡 面试回答技巧
 
+### 🎯 一句话回答（快速版）
+
+> CSS 盒模型由 content、padding、border、margin 组成。标准盒模型 width 只含 content，IE 盒模型（border-box）width 含 content+padding+border。现代开发推荐用 border-box。
+
+### 📣 口语化回答（推荐）
+
+面试时可以这样回答：
+
+> "CSS 盒模型描述了元素占据空间的方式，由四部分组成：**content**（内容）、**padding**（内边距）、**border**（边框）、**margin**（外边距）。
+>
+> 盒模型有两种：**标准盒模型**和 **IE 盒模型**。
+>
+> 标准盒模型（content-box）：width 和 height 只包含 content。比如设置 width: 200px，加上 padding: 20px 和 border: 5px，元素实际宽度是 200 + 20×2 + 5×2 = 250px。
+>
+> IE 盒模型（border-box）：width 和 height 包含 content + padding + border。设置 width: 200px，元素实际宽度就是 200px，content 会自动缩小。
+>
+> 通过 `box-sizing` 属性可以切换，默认是 content-box。
+>
+> 现代开发中推荐全局设置 `box-sizing: border-box`，因为更符合直觉，设置多宽就是多宽，做响应式布局也更方便，不用担心加 padding 后超出容器。"
+
 ### 推荐回答顺序
 
 1. **先说定义**：CSS盒模型包含content、padding、border、margin四部分

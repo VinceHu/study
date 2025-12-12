@@ -240,6 +240,28 @@ Boolean(0)       // false
 
 ## 💡 面试回答技巧
 
+### 🎯 一句话回答（快速版）
+
+> JavaScript 有 7 种基本类型（string、number、boolean、null、undefined、symbol、bigint）和 1 种引用类型（object）。检测类型用 typeof（基本类型）、instanceof（引用类型）或 Object.prototype.toString.call()（最准确）。
+
+### 📣 口语化回答（推荐）
+
+面试时可以这样回答：
+
+> "JavaScript 的数据类型分为**基本类型**和**引用类型**两大类。
+>
+> 基本类型有 7 种：string、number、boolean、null、undefined，还有 ES6 新增的 symbol 和 bigint。它们存储在栈内存，按值访问，赋值时会复制一份新的值。
+>
+> 引用类型就是 object，包括普通对象、数组、函数等。它们存储在堆内存，变量里存的是地址，赋值时复制的是地址，所以多个变量可能指向同一个对象。
+>
+> 类型检测的话，有三种常用方法：
+>
+> **typeof** 适合检测基本类型，但有个坑是 `typeof null` 返回 'object'，这是历史遗留 bug。
+>
+> **instanceof** 适合检测引用类型，原理是检查原型链，比如 `[] instanceof Array` 返回 true。
+>
+> **Object.prototype.toString.call()** 是最准确的方法，能区分所有类型，比如数组返回 '[object Array]'，null 返回 '[object Null]'。"
+
 ### 推荐回答顺序
 
 1. **先说分类**：

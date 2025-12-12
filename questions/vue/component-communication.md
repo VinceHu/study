@@ -650,6 +650,28 @@ defineExpose({
 
 ## 💡 面试回答技巧
 
+### 🎯 一句话回答（快速版）
+
+> Vue 组件通信方式：父子用 props/$emit，跨层级用 provide/inject，全局状态用 Pinia/Vuex，兄弟组件用事件总线或共同父组件。
+
+### 📣 口语化回答（推荐）
+
+面试时可以这样回答：
+
+> "Vue 组件通信方式挺多的，我按场景来说。
+>
+> **父子组件通信**是最常见的，父传子用 props，子传父用 $emit 触发事件。这是单向数据流，子组件不能直接修改 props。
+>
+> **跨层级通信**，比如爷孙组件，可以用 provide/inject。祖先组件 provide 提供数据，后代组件 inject 注入使用，不用一层层传 props。
+>
+> **兄弟组件通信**，可以通过共同的父组件中转，或者用事件总线 EventBus。不过 Vue 3 移除了 $on、$off，需要用第三方库 mitt 来实现。
+>
+> **全局状态管理**，复杂应用推荐用 Pinia 或 Vuex。Pinia 是 Vue 3 官方推荐的，API 更简洁，支持 Composition API，而且有更好的 TypeScript 支持。
+>
+> 还有一些其他方式，比如 $refs 可以直接访问子组件实例，$attrs 可以透传属性给孙组件，$parent/$children 可以访问父子组件（但不推荐，耦合太强）。
+>
+> 选择的话，简单场景用 props/emit，跨层级用 provide/inject，复杂全局状态用 Pinia。"
+
 ### 推荐回答顺序
 
 1. **先说父子通信**：

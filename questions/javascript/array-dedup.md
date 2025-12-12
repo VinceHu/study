@@ -13,6 +13,24 @@ codeFile: ../../code-examples/array-dedup.js
 
 请实现数组去重，并说明多种实现方式及其优缺点。
 
+## 🎯 一句话回答（快速版）
+
+最简单的方式是用ES6的Set：`[...new Set(arr)]`，一行代码搞定，时间复杂度O(n)，还能正确处理NaN。
+
+## 📣 口语化回答（推荐）
+
+数组去重最推荐的方式是用ES6的Set，一行代码就能搞定：`[...new Set(arr)]`。
+
+Set的优势很明显：首先代码简洁，其次性能好，时间复杂度是O(n)，因为Set内部用哈希表实现，查找是O(1)。另外Set还能正确处理NaN，因为它用的是SameValueZero算法。
+
+传统方案有filter配合indexOf，但有两个问题：一是时间复杂度是O(n²)，数据量大时性能差；二是indexOf无法识别NaN，因为NaN !== NaN。
+
+如果需要处理NaN但不能用Set，可以用includes代替indexOf，因为includes能正确识别NaN。
+
+还有一点要注意，所有这些方法都不能去重对象，因为对象是按引用比较的。如果需要对象数组去重，得用Map按某个属性去重，或者用JSON.stringify做深度比较。
+
+实际项目中，简单数组用Set就够了，对象数组可以用lodash的uniqBy。
+
 ## 📝 标准答案
 
 ### 核心要点

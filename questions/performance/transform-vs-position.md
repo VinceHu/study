@@ -12,6 +12,24 @@ hasCode: false
 
 为什么使用Transform做动画比使用绝对定位（top/left）性能更好？请从浏览器渲染机制的角度解释。
 
+## 🎯 一句话回答（快速版）
+
+Transform只触发合成（Composite），跳过重排和重绘，还能利用GPU加速；而top/left会触发重排和重绘，性能差很多。
+
+## 📣 口语化回答（推荐）
+
+这个问题要从浏览器的渲染流程说起。浏览器渲染页面有5个阶段：JavaScript、样式计算、布局（Layout）、绘制（Paint）、合成（Composite）。
+
+当我们修改top/left这些属性时，会触发布局阶段，也就是重排。重排需要重新计算元素的几何信息，而且可能影响到其他元素，代价很大。重排之后还要重绘，把元素重新画一遍。
+
+但Transform不一样，它只触发合成阶段，完全跳过了重排和重绘。而且Transform可以利用GPU加速，在独立的合成层上渲染，不占用主线程。
+
+所以做动画时，用transform: translateX()代替left，用transform: scale()代替width/height，性能会好很多，能轻松达到60fps的流畅动画。
+
+实际上，只有transform和opacity这两个属性能完全跳过重排重绘，是做动画的最佳选择。
+
+不过也要注意，不要滥用will-change或translateZ(0)来强制创建合成层，太多合成层会导致内存占用过高，反而影响性能，这叫层爆炸。
+
 ## 📝 标准答案
 
 ### 核心要点

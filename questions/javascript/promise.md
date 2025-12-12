@@ -356,6 +356,28 @@ async function getData() {
 
 ## 💡 面试回答技巧
 
+### 🎯 一句话回答（快速版）
+
+> Promise 是异步编程的解决方案，有三种状态（pending、fulfilled、rejected），通过 then 链式调用解决回调地狱问题，是微任务，优先于宏任务执行。
+
+### 📣 口语化回答（推荐）
+
+面试时可以这样回答：
+
+> "Promise 是 ES6 引入的异步编程解决方案，用来解决回调地狱的问题。
+>
+> 它有三种状态：**pending**（进行中）、**fulfilled**（成功）、**rejected**（失败）。状态只能从 pending 变成 fulfilled 或 rejected，而且一旦改变就不可逆。
+>
+> Promise 的核心是 **then 方法**，它返回一个新的 Promise，所以可以链式调用。这样就把嵌套的回调变成了扁平的链式结构，代码更清晰。
+>
+> 错误处理用 **catch** 方法，它能捕获前面所有 then 里的错误。最佳实践是在链的最后加一个 catch。
+>
+> 常用的静态方法有：**Promise.all** 等所有都成功才成功，**Promise.race** 谁先完成用谁的结果，**Promise.allSettled** 等所有都完成不管成功失败。
+>
+> 还有一点，Promise 的回调是**微任务**，会在当前宏任务执行完后、下一个宏任务之前执行，优先级比 setTimeout 高。
+>
+> 后来 ES7 又出了 async/await，本质上是 Promise 的语法糖，让异步代码写起来更像同步代码。"
+
 ### 推荐回答顺序
 
 1. **先说定义**：Promise是异步编程的解决方案，代表一个异步操作的最终结果

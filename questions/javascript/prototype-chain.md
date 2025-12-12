@@ -417,6 +417,24 @@ console.log(person.hasOwnProperty('toString'));  // false
 
 ## 💡 面试回答技巧
 
+### 🎯 一句话回答（快速版）
+
+> 每个对象都有 `__proto__` 指向其构造函数的 `prototype`，形成原型链。访问属性时沿着原型链向上查找，直到 Object.prototype。这是 JavaScript 实现继承的基础。
+
+### 📣 口语化回答（推荐）
+
+面试时可以这样回答：
+
+> "原型链是 JavaScript 实现继承的核心机制。
+>
+> 首先要理解两个属性：**prototype** 是函数才有的，指向原型对象；**__proto__** 是所有对象都有的，指向创建这个对象的构造函数的 prototype。
+>
+> 比如 `const arr = []`，arr 的 `__proto__` 指向 `Array.prototype`，`Array.prototype` 的 `__proto__` 又指向 `Object.prototype`，`Object.prototype` 的 `__proto__` 是 null。这样就形成了一条链，叫原型链。
+>
+> 原型链的作用是**属性查找**。当我们访问对象的属性时，先在对象自身找，找不到就沿着 `__proto__` 往上找，一直找到 `Object.prototype`，还找不到就返回 undefined。
+>
+> 继承的话，ES5 最佳实践是**寄生组合继承**，用 `Object.create()` 继承原型，用 `call()` 继承属性。ES6 的 `class extends` 写法更简洁，但本质上还是基于原型链的语法糖。"
+
 ### 推荐回答顺序
 
 1. **先解释概念**：

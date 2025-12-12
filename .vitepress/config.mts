@@ -84,7 +84,7 @@ export default defineConfig({
           items: [
             { text: 'Promise详解', link: '/questions/javascript/promise' },
             { text: 'async/await原理', link: '/questions/javascript/async-await' },
-            { text: '事件循环', link: '/questions/javascript/event-loop' }
+            { text: '事件循环机制', link: '/questions/javascript/event-loop' }
           ]
         },
         {
@@ -99,7 +99,9 @@ export default defineConfig({
         {
           text: 'Vue 核心概念',
           items: [
+            { text: 'MVVM 框架是什么', link: '/questions/vue/mvvm' },
             { text: 'Vue 2 和 Vue 3 的区别', link: '/questions/vue/vue2-vs-vue3' },
+            { text: '双向数据绑定原理', link: '/questions/vue/two-way-binding' },
             { text: 'Vue 生命周期', link: '/questions/vue/lifecycle' },
             { text: 'computed 和 watch 的区别', link: '/questions/vue/computed-vs-watch' }
           ]
@@ -150,6 +152,7 @@ export default defineConfig({
           text: '网络安全',
           items: [
             { text: '跨域 (CORS)', link: '/questions/network/cors' },
+            { text: '同源策略与跨域细节', link: '/questions/network/same-origin-policy-details' },
             { text: '前端安全 (XSS/CSRF)', link: '/questions/network/security' }
           ]
         }
@@ -174,6 +177,7 @@ export default defineConfig({
           text: '网络安全',
           items: [
             { text: '跨域 (CORS)', link: '/questions/network/cors' },
+            { text: '同源策略与跨域细节', link: '/questions/network/same-origin-policy-details' },
             { text: '前端安全 (XSS/CSRF)', link: '/questions/network/security' }
           ]
         }

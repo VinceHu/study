@@ -611,6 +611,28 @@ export default {
 
 ## 💡 面试回答技巧
 
+### 🎯 一句话回答（快速版）
+
+> Vue 生命周期分为创建、挂载、更新、销毁四个阶段，常用的钩子有 created（数据初始化）、mounted（DOM 操作）、beforeDestroy（清理工作）。
+
+### 📣 口语化回答（推荐）
+
+面试时可以这样回答：
+
+> "Vue 的生命周期分为四个阶段：**创建、挂载、更新、销毁**，每个阶段都有 before 和 after 两个钩子。
+>
+> 常用的几个钩子：
+>
+> **created** 是数据已经初始化好了，但 DOM 还没渲染，适合做数据初始化、调用 API 获取数据这些操作。
+>
+> **mounted** 是 DOM 已经挂载完成了，可以操作 DOM，适合初始化第三方库，比如 ECharts、地图这些需要 DOM 节点的库。
+>
+> **beforeDestroy**（Vue 3 改名叫 beforeUnmount）适合做清理工作，比如清除定时器、取消事件监听、取消未完成的请求，防止内存泄漏。
+>
+> 如果是父子组件的话，执行顺序是：父 beforeCreate → 父 created → 父 beforeMount → 子 beforeCreate → 子 created → 子 beforeMount → 子 mounted → 父 mounted。简单说就是父组件要等所有子组件挂载完才会触发自己的 mounted。
+>
+> Vue 3 的 Composition API 里用 onMounted、onUnmounted 这些函数来代替，写法不一样但原理是一样的。"
+
 ### 推荐回答顺序
 
 1. **先说生命周期阶段**：

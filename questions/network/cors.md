@@ -463,6 +463,28 @@ wss.on('connection', (ws) => {
 
 ## 💡 面试回答技巧
 
+### 🎯 一句话回答（快速版）
+
+> CORS 是服务器通过设置响应头（Access-Control-Allow-Origin）来允许跨域请求。简单请求直接发，复杂请求先发 OPTIONS 预检。其他方案有 JSONP（只支持 GET）和代理。
+
+### 📣 口语化回答（推荐）
+
+面试时可以这样回答：
+
+> "跨域问题是因为浏览器的**同源策略**，协议、域名、端口三者必须完全相同才算同源，不同源的 AJAX 请求会被限制。
+>
+> 解决跨域最常用的是 **CORS**，全称跨域资源共享。它需要**服务器配置**，在响应头里加上 `Access-Control-Allow-Origin` 指定允许的域名。
+>
+> CORS 请求分两种：**简单请求**和**预检请求**。
+>
+> 简单请求是 GET、POST、HEAD 方法，Content-Type 是表单类型，没有自定义头。浏览器直接发请求，服务器返回带 CORS 头的响应。
+>
+> 复杂请求（比如 PUT、DELETE，或者 Content-Type 是 application/json）会先发一个 **OPTIONS 预检请求**，问服务器允不允许，服务器返回允许的方法和头，然后才发实际请求。
+>
+> 如果要**携带 Cookie**，前端要设置 `credentials: 'include'`，服务器要设置 `Access-Control-Allow-Credentials: true`，而且 Allow-Origin 不能是 *，必须指定具体域名。
+>
+> 其他方案还有 **JSONP**，利用 script 标签不受同源限制，但只支持 GET；还有**代理**，开发环境用 webpack/vite 的 proxy，生产环境用 Nginx 反向代理。"
+
 ### 推荐回答顺序
 
 1. **先说同源策略**：

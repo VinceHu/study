@@ -98,6 +98,26 @@ window.addEventListener('storage', (e) => {
 
 ## 💡 面试回答技巧
 
+### 🎯 一句话回答（快速版）
+
+> 用户信息推荐用 Pinia/Vuex + localStorage 组合存储：Pinia 管理运行时状态，localStorage 做持久化，刷新页面时从 localStorage 恢复到 Pinia。
+
+### 📣 口语化回答（推荐）
+
+面试时可以这样回答：
+
+> "用户信息存储我推荐用 **Pinia（或 Vuex）+ localStorage** 的组合方案。
+>
+> Pinia 负责管理运行时的状态，组件里直接从 store 读取用户信息，响应式更新。localStorage 负责持久化，页面刷新后数据不会丢失。
+>
+> 具体流程是：用户登录成功后，把用户信息存到 Pinia，同时写入 localStorage。页面刷新时，在 App 初始化阶段从 localStorage 读取数据恢复到 Pinia。用户退出时，清空 Pinia 和 localStorage。
+>
+> 为什么不只用 localStorage？因为 localStorage 不是响应式的，数据变化不会自动更新视图，每次都要手动读取。
+>
+> 为什么不只用 Pinia？因为 Pinia 的数据存在内存里，页面刷新就没了。
+>
+> 安全方面要注意，敏感信息比如密码不要存 localStorage，容易被 XSS 攻击获取。Token 的话，如果安全要求高，可以用 httpOnly Cookie，这样 JS 访问不到，能防 XSS。"
+
 ### 推荐回答顺序
 
 1. **说明推荐方案**：Vuex/Pinia + localStorage组合

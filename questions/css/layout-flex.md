@@ -93,6 +93,30 @@ codeFile: ../../code-examples/layout-demos.html
 
 ## 💡 面试回答技巧
 
+### 🎯 一句话回答（快速版）
+
+> 用 Flex 布局：父元素 display: flex，左侧固定宽度，右侧 flex: 1 自动占满剩余空间。
+
+### 📣 口语化回答（推荐）
+
+面试时可以这样回答：
+
+> "左固定右自适应布局，我首选 **Flex** 方案。
+>
+> 父元素设置 `display: flex`，左侧设置固定宽度比如 `width: 200px`，右侧设置 `flex: 1`，它就会自动占满剩余空间。
+>
+> `flex: 1` 是 `flex-grow: 1; flex-shrink: 1; flex-basis: 0%` 的简写，意思是可以放大、可以缩小、初始大小为 0，然后按比例分配剩余空间。
+>
+> 其他方案还有：
+>
+> **Grid 布局**：`grid-template-columns: 200px 1fr`，1fr 表示剩余空间。
+>
+> **Float 布局**：左侧浮动，右侧设置 `margin-left` 或者 `overflow: hidden` 触发 BFC。
+>
+> **定位布局**：左侧绝对定位，右侧设置 `margin-left`。
+>
+> 现代项目推荐用 Flex 或 Grid，代码简洁，不用清除浮动，高度也能自动对齐。"
+
 ### 推荐回答顺序
 
 1. **优先说Flex方案**：这是现代开发的首选，简洁且功能强大

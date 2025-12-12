@@ -537,6 +537,26 @@ const results = await concurrentLimit(tasks, 3);  // 最多 3 个并发
 
 ## 💡 面试回答技巧
 
+### 🎯 一句话回答（快速版）
+
+> async/await 是 Promise 的语法糖，让异步代码写起来像同步代码。async 函数返回 Promise，await 等待 Promise 完成并返回结果，错误处理用 try/catch。
+
+### 📣 口语化回答（推荐）
+
+面试时可以这样回答：
+
+> "async/await 是 ES2017 引入的，本质上是 Promise 的语法糖，让异步代码写起来更像同步代码。
+>
+> **async** 关键字用来声明一个异步函数，这个函数会自动返回一个 Promise。函数里 return 的值会被包装成 Promise.resolve()，抛出的错误会被包装成 Promise.reject()。
+>
+> **await** 只能在 async 函数里用，它会等待后面的 Promise 完成，然后返回结果。在等待期间，函数会暂停执行，但不会阻塞主线程，其他代码可以继续跑。
+>
+> 错误处理的话，用 **try/catch** 就行，比 Promise 的 catch 更直观。
+>
+> 有个要注意的点是**并发优化**。如果有多个独立的异步操作，不要一个一个 await，那样是串行的。应该用 `Promise.all` 并发执行，比如 `await Promise.all([fetch1(), fetch2()])`。
+>
+> 底层原理的话，async/await 是基于 Generator 和自动执行器实现的。await 相当于 yield，遇到 await 就暂停，Promise 完成后再继续执行。"
+
 ### 推荐回答顺序
 
 1. **先说是什么**：

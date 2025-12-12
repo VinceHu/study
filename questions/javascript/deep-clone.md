@@ -1043,6 +1043,31 @@ class ConfigManager {
 
 ## 💡 面试回答技巧
 
+### 🎯 一句话回答（快速版）
+
+> 浅拷贝只复制第一层（Object.assign、展开运算符），深拷贝递归复制所有层级（JSON.parse/stringify 简单但有缺陷，完整实现需要用 WeakMap 处理循环引用）。
+
+### 📣 口语化回答（推荐）
+
+面试时可以这样回答：
+
+> "深拷贝和浅拷贝的区别在于：**浅拷贝**只复制对象的第一层，嵌套的对象还是共享引用；**深拷贝**会递归复制所有层级，完全独立。
+>
+> 浅拷贝的方法有 `Object.assign`、展开运算符 `{...obj}`、数组的 `slice`、`concat` 等。
+>
+> 深拷贝最简单的方法是 `JSON.parse(JSON.stringify(obj))`，但它有很多缺陷：无法处理函数、undefined、Symbol，无法处理循环引用，Date 会变成字符串，RegExp 会变成空对象。
+>
+> 完整的深拷贝实现需要考虑几个点：
+>
+> 1. **循环引用**：用 WeakMap 记录已经拷贝过的对象，遇到重复的直接返回
+> 2. **特殊对象**：Date、RegExp、Map、Set 要特殊处理
+> 3. **Symbol 属性**：用 Reflect.ownKeys 获取所有属性包括 Symbol
+> 4. **原型链**：用 Object.create 保持原型
+>
+> 现在浏览器还有个原生方法 `structuredClone`，可以处理循环引用和大部分类型，但也不支持函数。
+>
+> 实际项目中，简单场景用 JSON 方法，复杂场景用 lodash 的 cloneDeep。"
+
 ### 推荐回答顺序
 
 1. **先说概念**：

@@ -157,6 +157,26 @@ codeFile: ../../code-examples/center-methods.html
 
 ## 💡 面试回答技巧
 
+### 🎯 一句话回答（快速版）
+
+> 水平垂直居中首选 Flex（justify-content + align-items: center）或 Grid（place-items: center）。不知道尺寸时用定位 + transform: translate(-50%, -50%)。
+
+### 📣 口语化回答（推荐）
+
+面试时可以这样回答：
+
+> "水平垂直居中有很多方法，我按推荐程度来说。
+>
+> **首选 Flex**，代码最简洁：父元素设置 `display: flex; justify-content: center; align-items: center;` 就行了，不需要知道子元素尺寸。
+>
+> **Grid 也很方便**，一行代码：`display: grid; place-items: center;`。
+>
+> **定位 + Transform** 也常用：子元素设置 `position: absolute; top: 50%; left: 50%; transform: translate(-50%, -50%);`。translate 的百分比是相对自身尺寸，所以不需要知道元素宽高。
+>
+> 传统方案还有**定位 + margin 负值**（需要知道尺寸）、**定位 + margin: auto**、**table-cell** 等，但现在用得少了。
+>
+> 实际选择的话，现代项目直接用 Flex 或 Grid；需要兼容老浏览器用定位 + Transform；知道固定尺寸可以用定位 + margin 负值。"
+
 ### 推荐回答顺序
 
 1. **先说Flex方案**：这是现代开发的首选，代码最简洁

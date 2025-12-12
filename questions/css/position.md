@@ -195,6 +195,28 @@ top: 0;
 
 ## 💡 面试回答技巧
 
+### 🎯 一句话回答（快速版）
+
+> position 有 5 个值：static（默认）、relative（相对自身）、absolute（相对定位祖先）、fixed（相对视口）、sticky（滚动吸顶）。absolute 和 fixed 脱离文档流。
+
+### 📣 口语化回答（推荐）
+
+面试时可以这样回答：
+
+> "position 属性有 5 个值。
+>
+> **static** 是默认值，元素按正常文档流排列，top/left 这些属性不生效。
+>
+> **relative** 是相对定位，相对于元素自身原来的位置偏移，但**不脱离文档流**，原来的位置还保留着。常用来作为 absolute 的定位参考。
+>
+> **absolute** 是绝对定位，**脱离文档流**，相对于最近的非 static 祖先元素定位。如果没有，就相对于 body。常见用法是父元素设 relative，子元素设 absolute。
+>
+> **fixed** 是固定定位，也脱离文档流，相对于**视口**定位，滚动页面也不动。常用于固定导航栏、返回顶部按钮。有个坑是如果祖先元素有 transform，fixed 会相对于那个祖先而不是视口。
+>
+> **sticky** 是粘性定位，是 relative 和 fixed 的结合。正常情况下是 relative，滚动到指定位置后变成 fixed。常用于吸顶效果。要注意必须指定 top/bottom 等阈值才生效。
+>
+> 脱离文档流的是 absolute 和 fixed，它们不占据原来的空间。"
+
 ### 推荐回答顺序
 
 1. **先说常用的三种**：static（默认）、relative、absolute，这是最基础的
