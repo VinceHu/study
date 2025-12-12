@@ -30,7 +30,7 @@ export default defineConfig({
       { text: 'Vue', link: '/questions/vue/vue2-vs-vue3' },
       { text: 'Network', link: '/questions/browser/url-to-page' },
       { text: 'Performance', link: '/questions/performance/cache-strategy' },
-      { text: '项目实战', link: '/projects/' },
+      { text: 'Projects', link: '/projects/' },
       { text: 'Knowledge Map', link: '/knowledge-map/' }
     ],
 
@@ -195,7 +195,7 @@ export default defineConfig({
       
       '/projects/': [
         {
-          text: '项目实战',
+          text: 'Projects',
           items: [
             { text: '栏目介绍', link: '/projects/' }
           ]
