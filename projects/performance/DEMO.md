@@ -105,17 +105,14 @@ npm run dev
 
 ## 🎨 效果预览
 
-### 文件选择
-![文件选择](./screenshots/file-select.png)
+### 主要功能界面
 
-### Hash 计算
-![Hash 计算](./screenshots/hash-calculating.png)
+1. **文件选择界面**：支持点击选择或拖拽上传
+2. **Hash 计算界面**：显示文件 Hash 计算进度
+3. **上传进度界面**：显示整体进度和分片状态
+4. **上传完成界面**：显示上传结果和文件信息
 
-### 上传中
-![上传中](./screenshots/uploading.png)
-
-### 上传完成
-![上传完成](./screenshots/upload-success.png)
+> 💡 提示：运行 Demo 后可以看到完整的交互效果
 
 ## 💡 注意事项
 
